@@ -1,74 +1,202 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<title>COMMERCIAL by KARIM BANAQQA</title>
-		<link rel="stylesheet" href="main.css" />
-		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1376112512950009" crossorigin="anonymous"></script>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر مواد البناء - LIFE CERAME</title>
+    <style>
+        /* تنسيق الجسم العام */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        /* شريط التنقل */
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .company-name {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        /* القائمة الجانبية */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #007bff;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* محتوى الصفحة */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .section h2 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        /* قسم التعريف */
+        .intro {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .intro img {
+            max-width: 300px;
+            border-radius: 8px;
+            margin-left: 20px;
+        }
+        .intro p {
+            font-size: 18px;
+            text-align: justify;
+        }
+        /* التأثيرات المتجاوبة */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            .intro {
+                flex-direction: column;
+                align-items: center;
+            }
+            .intro img {
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+        function closeSidebar() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
+</head>
+<body>
 
-		<!-- Wrapper -->
-		<div id="wrapper">
+    <!-- شريط التنقل -->
+    <div class="navbar">
+        <div class="logo" onclick="openSidebar()">☰ القائمة</div>
+        <div class="company-name">LIFE CERAME</div>
+    </div>
 
-			<!-- Header -->
-			<header id="header">
-				<div class="logo">
-					<span class="icon fa-gem"></span>
-				</div>
-				<div class="content">
-					<div class="inner">
-						<h1>KARIM BENAQQA</h1>
-						<p>SERVICES INSTALLATION <a href="https://qrco.de/bfSPRV">FIBER ORANGE</a> <br />
-						& SELLING <a href="https://online.flippingbook.com/view/123995171/21">TILES AND MARBLE</a></p>
-					</div>
-				</div>
-				<nav>
-					<ul>
-						<li><a href="https://qrco.de/bfSPRV">FIBER ORANGE</a></li>
-						<li><a href="https://online.flippingbook.com/view/123995171/21">TILES</a></li>
-						<li><a href="https://drive.google.com/file/d/1-9Mema5LGYONNsWuRo687HjPVKXormKS/view?usp=drivesdk">MARBLE</a></li>
-						<li><a href="https://wa.me/212660201206">Contact</a></li>
-					</ul>
-				</nav>
-			</header>
+    <!-- القائمة الجانبية -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">×</a>
+        <a href="#zellige">الزليج</a>
+        <a href="#marble">الرخام</a>
+        <a href="#santir">السنطير</a>
+        <a href="#robinates">الروبينات</a>
+        <a href="#zellige-materials">مواد مساعدة للزليج</a>
+        <a href="#pricing">الأسعار</a>
+        <a href="#contact">تواصل معنا</a>
+    </div>
 
-			<!-- Ad Block (يمكنك تخصيص مكان الإعلانات هنا) -->
-			<div style="text-align: center; margin: 20px 0;">
-				<ins class="adsbygoogle"
-					 style="display:block"
-					 data-ad-client="ca-pub-1376112512950009"
-					 data-ad-slot="3093207471"
-					 data-ad-format="auto"
-					 data-full-width-responsive="true"></ins>
-				<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
+    <div class="container">
+        <!-- قسم التعريف عن المنتجات -->
+        <div class="intro">
+            <p>مرحبًا بكم في متجر LIFE CERAME، حيث نقدم مجموعة متنوعة من مواد البناء عالية الجودة مثل الزليج، الرخام، السنطير، والروبينات. نحن هنا لتلبية احتياجاتكم بمساعدة مواد البناء المثالية.</p>
+            <img src="path/to/your/image.jpg" alt="صورة المنتجات" />
+        </div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<p class="copyright">&copy; BENAQQA. Design: <a href="https://wa.me/212660201206">KARIM</a>.</p>
-			</footer>
+        <!-- قسم الزليج -->
+        <div class="section" id="zellige">
+            <h2>قسم الزليج</h2>
+            <p>معلومات حول أنواع الزليج المختلفة.</p>
+        </div>
 
-		</div>
+        <!-- قسم الرخام -->
+        <div class="section" id="marble">
+            <h2>قسم الرخام</h2>
+            <p>معلومات حول أنواع الرخام المتاحة.</p>
+        </div>
 
-		<!-- BG -->
-		<div id="bg"></div>
+        <!-- قسم السنطير -->
+        <div class="section" id="santir">
+            <h2>قسم السنطير</h2>
+            <p>معلومات حول أنواع السنطير وأدواته.</p>
+        </div>
 
-		<!-- Scripts -->
-		<script src="jquery.min.js"></script>
-		<script src="browser.min.js"></script>
-		<script src="breakpoints.min.js"></script>
-		<script src="util.js"></script>
-		<script src="main.js"></script>
+        <!-- قسم الروبينات -->
+        <div class="section" id="robinates">
+            <h2>قسم الروبينات</h2>
+            <p>معلومات حول الروبينات المختلفة.</p>
+        </div>
 
-	</body>
+        <!-- قسم مواد المساعدة للزليج -->
+        <div class="section" id="zellige-materials">
+            <h2>قسم مواد المساعدة للزليج</h2>
+            <p>معلومات حول المواد المساعدة مثل الكولة وأنواعها.</p>
+        </div>
+
+        <!-- قسم الأسعار -->
+        <div class="section" id="pricing">
+            <h2>قسم الأسعار</h2>
+            <p>جدول يوضح أسعار المنتجات المختلفة.</p>
+        </div>
+
+        <!-- قسم التواصل -->
+        <div class="section" id="contact">
+            <h2>تواصل معنا</h2>
+            <p>معلومات حول كيفية التواصل معنا.</p>
+        </div>
+    </div>
+
+</body>
 </html>
