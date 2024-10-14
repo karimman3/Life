@@ -4,33 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIFE CERAME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f0f8ff;
+            overflow-x: hidden; /* منع التمرير الأفقي */
         }
         header {
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             padding: 15px;
             text-align: center;
+            position: relative;
+        }
+        .menu-toggle {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
         }
         nav {
+            background-color: #0056b3;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            right: -250px; /* وضع القائمة خارج الشاشة في البداية */
+            width: 250px;
+            height: 100%;
+            transition: right 0.3s ease; /* تأثير الانتقال */
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+        nav.active {
+            right: 0; /* تظهر القائمة عند التفعيل */
+        }
+        nav ul {
+            list-style: none;
+            padding: 20px 0; /* إضافة حواف علوية وسفلية */
+            margin: 0;
+        }
+        nav ul li {
+            margin: 15px 0; /* ضبط الهامش عمودي */
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
             display: flex;
-            justify-content: center;
-            background-color: #444;
+            align-items: center;
             padding: 10px;
         }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
+        nav ul li a i {
+            margin-left: 8px;
+        }
+        nav ul li a:hover {
+            color: #ffcc00;
+            background-color: rgba(255, 255, 255, 0.1); /* تأثير عند التحويم */
+            border-radius: 5px; /* حواف دائرية */
+        }
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .category-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 0 10px;
+            text-align: center;
+            width: 200px;
+        }
+        .category-box a {
+            color: #007bff;
             text-decoration: none;
             font-size: 18px;
         }
-        nav a:hover {
-            color: #ff9800;
+        .category-box a i {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 10px;
         }
         .container {
             padding: 20px;
@@ -41,9 +100,11 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
         }
         footer {
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -57,14 +118,31 @@
 
     <header>
         <h1>LIFE CERAME</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
     </header>
 
-    <nav>
-        <a href="#">الرئيسية</a>
-        <a href="Service.html">خدماتنا</a>
-        <a href="About us.html">من نحن</a>
-        <a href="#">اتصل بنا</a>
+    <nav id="navbar">
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="Service.html"><i class="fas fa-concierge-bell"></i> خدماتنا</a></li>
+            <li><a href="About us.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+        </ul>
     </nav>
+
+    <div class="categories">
+        <div class="category-box">
+            <a href="marble.html"><i class="fas fa-gem"></i> الرخام</a>
+        </div>
+        <div class="category-box">
+            <a href="ceramic.html"><i class="fas fa-th-large"></i> السراميك</a>
+        </div>
+        <div class="category-box">
+            <a href="center.html"><i class="fas fa-building"></i> السنتير</a>
+        </div>
+    </div>
 
     <div class="container">
         <div class="content">
@@ -76,6 +154,13 @@
     <footer>
         <p>&copy; 2024 LIFE CERAME - جميع الحقوق محفوظة</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
