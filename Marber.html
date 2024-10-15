@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types de Marbre</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .type {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .box {
+            flex: 1 1 30%;
+            margin: 10px;
+            padding: 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .box:hover {
+            background-color: #0056b3;
+        }
+
+        .calculator {
+            flex-basis: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .calculator button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .calculator button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Types de Marbre</h1>
+        <div class="type">
+            <div class="box">
+                <h2>Granit</h2>
+                <p>Description du granit.</p>
+            </div>
+            <div class="box">
+                <h2>Marbre</h2>
+                <p>Description du marbre.</p>
+            </div>
+            <div class="box">
+                <h2>Carreaux</h2>
+                <p>Description des carreaux.</p>
+            </div>
+        </div>
+        <div class="type">
+            <div class="box">
+                <h2>Pierre</h2>
+                <p>Description de la pierre.</p>
+            </div>
+            <div class="box">
+                <h2>Artificiel</h2>
+                <p>Description du matériau artificiel.</p>
+            </div>
+            <div class="calculator">
+                <h2>حساب</h2>
+                <button onclick="window.location.href='Calcul.html'">ذهاب إلى صفحة الحساب</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
