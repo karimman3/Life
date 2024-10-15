@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختيار نوع الرخام</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>اختر نوع الرخام</h1>
+
+    <label for="marbleType">نوع الرخام:</label>
+    <select id="marbleType">
+        <option value="labrador noir" data-price="1200">labrador noir - 1200 درهم</option>
+        <option value="labrador bleu" data-price="1200">labrador bleu - 1200 درهم</option>
+        <option value="noir galaxy" data-price="1150">noir galaxy - 1150 درهم</option>
+        <option value="creme galala" data-price="400">creme galala - 400 درهم</option>
+        <!-- أضف المزيد من الأنواع حسب الحاجة -->
+    </select>
+
+    <button onclick="selectMarble()">اختيار</button>
+
+    <script>
+        function selectMarble() {
+            const marbleTypeSelect = document.getElementById('marbleType');
+            const selectedMarble = marbleTypeSelect.value;
+            const selectedPrice = marbleTypeSelect.selectedOptions[0].dataset.price;
+
+            // إعادة التوجيه إلى صفحة حاسبة المتر المربع مع تمرير البيانات
+            window.location.href = `calculator.html?marble=${encodeURIComponent(selectedMarble)}&price=${encodeURIComponent(selectedPrice)}`;
+        }
+    </script>
+
+</body>
+</html>
