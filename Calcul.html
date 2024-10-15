@@ -1,165 +1,195 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة المتر المربع</title>
+    <title>Calculateur de Marbre</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         h1 {
             text-align: center;
+            color: #333;
         }
-        label {
-            display: block;
-            margin-top: 10px;
+
+        .marbre-selection,
+        .dimensions-selection {
+            margin: 20px 0;
         }
-        input, select {
+
+        select,
+        input[type="number"] {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
+            margin-top: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 4px;
+            transition: border-color 0.3s;
         }
-        button {
-            background-color: #007bff;
+
+        select:hover,
+        input[type="number"]:hover {
+            border-color: #007BFF;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
             margin-top: 20px;
-            width: 100%;
+            font-size: 1em;
         }
-        button:hover {
+
+        .button:hover {
             background-color: #0056b3;
         }
-        .result {
+
+        .calculations {
             margin-top: 20px;
-            padding: 10px;
-            background-color: #e7f1ff;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .type-select {
-            display: none; /* إخفاء خانة اختيار النوع */
-        }
-        .dimensions {
-            margin-top: 20px;
-        }
-        .dimension-group {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #007bff;
-            border-radius: 5px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Choisissez le type de marbre</h1>
+        <div class="marbre-selection">
+            <select id="marbreType" onchange="updatePrice()">
+                <option value="" data-price="0">Sélectionnez un marbre</option>
+                <option value="labrador noir" data-price="1200">Labrador Noir</option>
+                <option value="labrador bleu" data-price="1150">Labrador Bleu</option>
+                <option value="noir galaxy" data-price="1150">Noir Galaxy</option>
+                <option value="creme galala" data-price="400">Crème Galala</option>
+                <option value="gris chine" data-price="650">Gris Chine</option>
+                <option value="rouge balmoral" data-price="850">Rouge Balmoral</option>
+                <option value="noir absolu" data-price="1200">Noir Absolu</option>
+                <option value="blanc perle" data-price="650">Blanc Perle</option>
+                <option value="rose porrino" data-price="650">Rose Porrino</option>
+                <option value="new halab" data-price="400">New Halab</option>
+                <option value="gris rafael" data-price="650">Gris Rafael</option>
+                <option value="capovolta" data-price="3500">Capovolta</option>
+                <option value="gris espanol" data-price="700">Gris Espagnol</option>
+                <option value="blanc ibiza" data-price="700">Blanc Ibiza</option>
+                <option value="creme royal" data-price="600">Crème Royal</option>
+                <option value="perlato" data-price="550">Perlato</option>
+                <option value="blanco thassos" data-price="650">Blanco Thassos</option>
+                <option value="calacata" data-price="750">Calacata</option>
+                <option value="creme marfil" data-price="500">Crème Marfil</option>
+                <option value="blanc polaress" data-price="700">Blanc Polaress</option>
+                <option value="perlatino" data-price="600">Perlatino</option>
+                <option value="blanco carrara" data-price="550">Blanco Carrara</option>
+                <option value="marron imperial" data-price="650">Marron Imperial</option>
+                <option value="gris armani" data-price="750">Gris Armani</option>
+                <option value="panda blanc" data-price="500">Panda Blanc</option>
+                <option value="rose portugal" data-price="700">Rose Portugal</option>
+                <option value="noir portoro" data-price="600">Noir Portoro</option>
+                <option value="marron light" data-price="550">Marron Light</option>
+                <option value="noir flawr" data-price="650">Noir Flawr</option>
+                <option value="blanc portugal" data-price="750">Blanc Portugal</option>
+                <option value="noir markina" data-price="500">Noir Markina</option>
+                <option value="creme slyvia" data-price="700">Crème Slyvia</option>
+                <option value="new calacata dore" data-price="600">New Calacata Doré</option>
+                <option value="new calacata gris" data-price="550">New Calacata Gris</option>
+                <option value="new creme beige" data-price="650">New Crème Beige</option>
+                <option value="kamal bacha" data-price="750">Kamal Bacha</option>
+                <option value="blanc sivec" data-price="500">Blanc Sivec</option>
+            </select>
+        </div>
 
-    <h1>حاسبة المتر المربع</h1>
+        <div class="dimensions-selection">
+            <label for="length">Entrez la longueur (m):</label>
+            <input type="number" id="length" placeholder="Longueur en mètres" oninput="calculateCost()">
+            <label for="width">Entrez la largeur (m):</label>
+            <input type="number" id="width" placeholder="Largeur en mètres" oninput="calculateCost()">
+            <label for="quantity">Entrez la quantité:</label>
+            <input type="number" id="quantity" placeholder="Quantité" oninput="calculateCost()">
+        </div>
 
-    <label for="item">اختر العنصر:</label>
-    <select id="item" onchange="showTypeSelect()">
-        <option value="">-- اختر العنصر --</option>
-        <option value="السراميك" data-price="200">السراميك (200 درهم/م²)</option>
-        <option value="الرخام" data-price="500">الرخام (500 درهم/م²)</option>
-    </select>
+        <button class="button" onclick="addCalculation()">Ajouter un calcul</button>
 
-    <div id="typeSelect" class="type-select">
-        <label for="marbleType">اختر نوع الرخام:</label>
-        <select id="marbleType">
-            <option value="رخام أبيض" data-price="500">رخام أبيض (500 درهم/م²)</option>
-            <option value="رخام ملون" data-price="700">رخام ملون (700 درهم/م²)</option>
-        </select>
+        <div class="calculations">
+            <div class="result">
+                <h2>Coût Total: <span id="totalCost">0</span> MAD</h2>
+                <h2>Superficie: <span id="totalArea">0</span> m²</h2>
+            </div>
+        </div>
     </div>
 
-    <div id="dimensions" class="dimensions"></div>
-
-    <button onclick="addDimensionGroup()">أضف حقل أبعاد جديد</button>
-    <button onclick="calculateTotal()">احسب المجموع</button>
-
-    <div class="result" id="result" style="display:none;"></div>
-
     <script>
-        let dimensionGroupCount = 0;
+        function updatePrice() {
+            const select = document.getElementById('marbreType');
+            const selectedOption = select.options[select.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            calculateCost(); // Recalculate cost whenever the type is changed
+        }
 
-        function showTypeSelect() {
-            const itemSelect = document.getElementById('item');
-            const typeSelect = document.getElementById('typeSelect');
-            const dimensions = document.getElementById('dimensions');
-            dimensions.innerHTML = ''; // إعادة تعيين المحتوى
-            dimensionGroupCount = 0; // إعادة تعيين عدد مجموعات الأبعاد
+        function calculateCost() {
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+            const quantity = document.getElementById('quantity').value;
+            const pricePerM2 = document.getElementById('marbreType').selectedOptions[0].getAttribute('data-price');
 
-            if (itemSelect.value === 'الرخام') {
-                typeSelect.style.display = 'block';
-                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
-            } else if (itemSelect.value === 'السراميك') {
-                typeSelect.style.display = 'none';
-                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
-            } else {
-                typeSelect.style.display = 'none';
+            const area = length * width; // Calculate area
+            const totalCost = area * pricePerM2 * quantity; // Calculate total cost
+
+            // Update displayed values
+            document.getElementById('totalArea').textContent = area.toFixed(2);
+            document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+        }
+
+        function addCalculation() {
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+            const quantity = document.getElementById('quantity').value;
+            const pricePerM2 = document.getElementById('marbreType').selectedOptions[0].getAttribute('data-price');
+
+            const area = length * width;
+            const totalCost = area * pricePerM2 * quantity;
+
+            const resultText = `Marbre: ${document.getElementById('marbreType').value}, Longueur: ${length} m, Largeur: ${width} m, Quantité: ${quantity}, Superficie: ${area.toFixed(2)} m², Coût Total: ${totalCost.toFixed(2)} MAD`;
+
+            const resultDiv = document.createElement('div');
+            resultDiv.textContent = resultText;
+            document.querySelector('.calculations').appendChild(resultDiv);
+            
+            // Reset fields after adding calculation
+            document.getElementById('length').value = '';
+            document.getElementById('width').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('totalArea').textContent = '0';
+            document.getElementById('totalCost').textContent = '0';
             }
-        }
-
-        function addDimensionGroup() {
-            dimensionGroupCount++;
-            const dimensionsDiv = document.getElementById('dimensions');
-            const groupDiv = document.createElement('div');
-            groupDiv.className = 'dimension-group';
-            groupDiv.innerHTML = `
-                <h3>مجموعة الأبعاد ${dimensionGroupCount}</h3>
-                <label for="length${dimensionGroupCount}">طول (م):</label>
-                <input type="number" id="length${dimensionGroupCount}" placeholder="أدخل الطول" required />
-                <label for="width${dimensionGroupCount}">عرض (م):</label>
-                <input type="number" id="width${dimensionGroupCount}" placeholder="أدخل العرض" required />
-                <label for="quantity${dimensionGroupCount}">عدد العناصر:</label>
-                <input type="number" id="quantity${dimensionGroupCount}" placeholder="أدخل العدد" required min="1" />
-            `;
-            dimensionsDiv.appendChild(groupDiv);
-        }
-
-        function calculateTotal() {
-            const itemSelect = document.getElementById('item');
-            const pricePerSquareMeter = parseFloat(itemSelect.selectedOptions[0].dataset.price);
-            let totalCost = 0;
-            let totalArea = 0;
-
-            const dimensionsDiv = document.getElementById('dimensions');
-            const lengthInputs = dimensionsDiv.querySelectorAll('[id^="length"]');
-            const widthInputs = dimensionsDiv.querySelectorAll('[id^="width"]');
-            const quantityInputs = dimensionsDiv.querySelectorAll('[id^="quantity"]');
-
-            lengthInputs.forEach((lengthInput, index) => {
-                const length = parseFloat(lengthInput.value);
-                const width = parseFloat(widthInputs[index].value);
-                const quantity = parseInt(quantityInputs[index].value);
-
-                if (isNaN(length) || isNaN(width) || isNaN(quantity)) {
-                    alert('يرجى إدخال قيم صحيحة للطول والعرض والعدد.');
-                    return;
-                }
-
-                const area = length * width; // حساب المساحة بالمتر المربع
-                totalArea += area * quantity; // إضافة المساحة مضروبة في العدد إلى المجموع
-                totalCost += area * pricePerSquareMeter * quantity; // إضافة التكلفة مضروبة في العدد إلى المجموع
-            });
-
-            // عرض النتيجة
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `المساحة الإجمالية: ${totalArea.toFixed(2)} م²<br>التكلفة الإجمالية: ${totalCost.toFixed(2)} درهم`;
-            resultDiv.style.display = 'block';
-        }
-    </script>
-
-</body>
-</html>
+            </script>
+            </body>
+            </html>
