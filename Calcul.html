@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة المتر المربع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f1ff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .type-select {
+            display: none; /* إخفاء خانة اختيار النوع */
+        }
+        .dimensions {
+            margin-top: 20px;
+        }
+        .dimension-group {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>حاسبة المتر المربع</h1>
+
+    <label for="item">اختر العنصر:</label>
+    <select id="item" onchange="showTypeSelect()">
+        <option value="">-- اختر العنصر --</option>
+        <option value="السراميك" data-price="200">السراميك (200 درهم/م²)</option>
+        <option value="الرخام" data-price="500">الرخام (500 درهم/م²)</option>
+    </select>
+
+    <div id="typeSelect" class="type-select">
+        <label for="marbleType">اختر نوع الرخام:</label>
+        <select id="marbleType">
+            <option value="رخام أبيض" data-price="500">رخام أبيض (500 درهم/م²)</option>
+            <option value="رخام ملون" data-price="700">رخام ملون (700 درهم/م²)</option>
+        </select>
+    </div>
+
+    <div id="dimensions" class="dimensions"></div>
+
+    <button onclick="addDimensionGroup()">أضف حقل أبعاد جديد</button>
+    <button onclick="calculateTotal()">احسب المجموع</button>
+
+    <div class="result" id="result" style="display:none;"></div>
+
+    <script>
+        let dimensionGroupCount = 0;
+
+        function showTypeSelect() {
+            const itemSelect = document.getElementById('item');
+            const typeSelect = document.getElementById('typeSelect');
+            const dimensions = document.getElementById('dimensions');
+            dimensions.innerHTML = ''; // إعادة تعيين المحتوى
+            dimensionGroupCount = 0; // إعادة تعيين عدد مجموعات الأبعاد
+
+            if (itemSelect.value === 'الرخام') {
+                typeSelect.style.display = 'block';
+                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
+            } else if (itemSelect.value === 'السراميك') {
+                typeSelect.style.display = 'none';
+                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
+            } else {
+                typeSelect.style.display = 'none';
+            }
+        }
+
+        function addDimensionGroup() {
+            dimensionGroupCount++;
+            const dimensionsDiv = document.getElementById('dimensions');
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'dimension-group';
+            groupDiv.innerHTML = `
+                <h3>مجموعة الأبعاد ${dimensionGroupCount}</h3>
+                <label for="length${dimensionGroupCount}">طول (م):</label>
+                <input type="number" id="length${dimensionGroupCount}" placeholder="أدخل الطول" required />
+                <label for="width${dimensionGroupCount}">عرض (م):</label>
+                <input type="number" id="width${dimensionGroupCount}" placeholder="أدخل العرض" required />
+                <label for="quantity${dimensionGroupCount}">عدد العناصر:</label>
+                <input type="number" id="quantity${dimensionGroupCount}" placeholder="أدخل العدد" required min="1" />
+            `;
+            dimensionsDiv.appendChild(groupDiv);
+        }
+
+        function calculateTotal() {
+            const itemSelect = document.getElementById('item');
+            const pricePerSquareMeter = parseFloat(itemSelect.selectedOptions[0].dataset.price);
+            let totalCost = 0;
+            let totalArea = 0;
+
+            const dimensionsDiv = document.getElementById('dimensions');
+            const lengthInputs = dimensionsDiv.querySelectorAll('[id^="length"]');
+            const widthInputs = dimensionsDiv.querySelectorAll('[id^="width"]');
+            const quantityInputs = dimensionsDiv.querySelectorAll('[id^="quantity"]');
+
+            lengthInputs.forEach((lengthInput, index) => {
+                const length = parseFloat(lengthInput.value);
+                const width = parseFloat(widthInputs[index].value);
+                const quantity = parseInt(quantityInputs[index].value);
+
+                if (isNaN(length) || isNaN(width) || isNaN(quantity)) {
+                    alert('يرجى إدخال قيم صحيحة للطول والعرض والعدد.');
+                    return;
+                }
+
+                const area = length * width; // حساب المساحة بالمتر المربع
+                totalArea += area * quantity; // إضافة المساحة مضروبة في العدد إلى المجموع
+                totalCost += area * pricePerSquareMeter * quantity; // إضافة التكلفة مضروبة في العدد إلى المجموع
+            });
+
+            // عرض النتيجة
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `المساحة الإجمالية: ${totalArea.toFixed(2)} م²<br>التكلفة الإجمالية: ${totalCost.toFixed(2)} درهم`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
