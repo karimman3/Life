@@ -118,17 +118,17 @@
 
     <header>
         <h1>LIFE CERAME</h1>
-        <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-toggle" onclick="toggleMenu(event)">
             <i class="fas fa-bars"></i>
         </div>
     </header>
 
     <nav id="navbar">
         <ul>
-            <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="Service.html"><i class="fas fa-concierge-bell"></i> خدماتنا</a></li>
-            <li><a href="About us.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
-            <li><a href="Contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+            <li><a href="#" onclick="closeMenu()"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="Service.html" onclick="closeMenu()"><i class="fas fa-concierge-bell"></i> خدماتنا</a></li>
+            <li><a href="About us.html" onclick="closeMenu()"><i class="fas fa-info-circle"></i> من نحن</a></li>
+            <li><a href="Contact.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
         </ul>
     </nav>
 
@@ -156,10 +156,24 @@
     </footer>
 
     <script>
-        function toggleMenu() {
+        function toggleMenu(event) {
+            event.stopPropagation(); // منع الحدث من الانتقال للأعلى
             const nav = document.getElementById('navbar');
             nav.classList.toggle('active');
         }
+
+        function closeMenu() {
+            const nav = document.getElementById('navbar');
+            nav.classList.remove('active'); // إزالة فئة active لإغلاق القائمة
+        }
+
+        // إغلاق القائمة عند الضغط في أي مكان آخر
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('navbar');
+            if (nav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
     </script>
 
 </body>
