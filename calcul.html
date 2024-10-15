@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang=""ar"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>حاسبة المتر المربع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f1ff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .type-select {
+            display: none; /* إخفاء خانة اختيار النوع */
+        }
+        .dimensions {
+            margin-top: 20px;
+        }
+        .dimension-group {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>حاسبة المتر المربع</h1>
+
+    <label for=""item"">اختر العنصر:</label>
+    <select id=""item"" onchange=""showTypeSelect()"">
+        <option value="""">-- اختر العنصر --</option>
+        <option value=""السراميك"" data-price=""200"">السراميك</option>
+        <option value=""الرخام"" data-price=""500"">الرخام </option>
+    </select>
+
+    <div id=""typeSelect"" class=""type-select"">
+        <label for=""marbleType"">اختر نوع الرخام:</label>
+        <select id=""marbleType"" onchange=""updateMarblePrice()"">
+            <option value="labrador noir"" data-price=""1200"">labrador noir</option>
+            <option value="labrador bleu"" data-price=""1200"">labrador bleu</option>
+            <option value="noir galaxy"" data-price=""1150"">noir galaxy</option>
+            <option value="creme galala"" data-price=""400"">creme galala</option>
+            <option value=""gris chine"" data-price=""650"">gris chine</option>
+            <option value=""rouge balmoral"" data-price=""850"">rouge balmoral</option>
+            <option value=""noir absolu"" data-price=""1200"">noir absolu</option>
+            <option value=""blanc perle"" data-price=""650"">blanc perle</option>
+            <option value=""rose porrino"" data-price=""650"">rose porrino</option>
+            <option value=""new halab"" data-price=""400"">new halab</option>
+            <option value=""gris rafael"" data-price=""650"">gris rafael</option>
+            <option value=""capovolta"" data-price=""3500"">capovolta</option>
+            <option value=""gris espanol"" data-price=""700"">gris espanol</option>
+            <option value=""blanc ibiza"" data-price=""700"">blanc ibiza</option>
+            <option value=""creme royal"" data-price=""600"">creme royal</option>
+            <option value=""perlato"" data-price=""550"">perlato</option>
+            <option value=""blanco thassos"" data-price=""650"">blanco thassos</option>
+            <option value=""calacata"" data-price=""750"">calacata</option>
+            <option value=""creme marfil"" data-price=""500"">creme marfil</option>
+            <option value=""blanc polaress"" data-price=""700"">blanc polaress</option>
+            <option value=""perlatino"" data-price=""600"">perlatino</option>
+            <option value=""blanco carrara"" data-price=""550"">blanco carrara</option>
+            <option value=""marron imperial"" data-price=""650"">marron imperial</option>
+            <option value=""gris armani"" data-price=""750"">gris armani</option>
+            <option value=""panda blanc"" data-price=""500"">panda blanc</option>
+            <option value=""rose portuga"" data-price=""700"">rose portugal</option>
+            <option value=""noir portoro"" data-price=""600"">noir portoro</option>
+            <option value=""marron light"" data-price=""550"">marron light</option>
+            <option value=""noir flawr"" data-price=""650"">noir flawr</option>
+            <option value=""blanc portugal"" data-price=""750"">blanc portugal</option>
+            <option value=""noir markina"" data-price=""500"">noir markina</option>
+            <option value=""creme slyvia"" data-price=""700"">creme slyvia</option>
+            <option value=""new calacata dore"" data-price=""600"">new calacata dore</option>
+            <option value=""new calacata gris"" data-price=""550"">new calacata gris</option>
+            <option value=""new creme beige"" data-price=""650"">new creme beige</option>
+            <option value=""kamal bacha"" data-price=""750"">kamal bacha</option>
+            <option value=""blanc sivec"" data-price=""500"">blanc sivec</option>
+            
+        </select>
+    </div>
+
+    <div id=""dimensions"" class=""dimensions""></div>
+
+    <button onclick=""addDimensionGroup()"">أضف حقل أبعاد جديد</button>
+    <button onclick=""calculateTotal()"">احسب المجموع</button>
+
+    <div class=""result"" id=""result"" style=""display:none;""></div>
+
+    <script>
+        let dimensionGroupCount = 0;
+
+        function showTypeSelect() {
+            const itemSelect = document.getElementById('item');
+            const typeSelect = document.getElementById('typeSelect');
+            const dimensions = document.getElementById('dimensions');
+            dimensions.innerHTML = ''; // إعادة تعيين المحتوى
+            dimensionGroupCount = 0; // إعادة تعيين عدد مجموعات الأبعاد
+
+            if (itemSelect.value === 'الرخام') {
+                typeSelect.style.display = 'block';
+                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
+            } else if (itemSelect.value === 'السراميك') {
+                typeSelect.style.display = 'none';
+                addDimensionGroup(); // إضافة أول مجموعة من الأبعاد
+            } else {
+                typeSelect.style.display = 'none';
+            }
+        }
+
+        function updateMarblePrice() {
+            const marbleTypeSelect = document.getElementById('marbleType');
+            const selectedPrice = parseFloat(marbleTypeSelect.selectedOptions[0].dataset.price);
+            const itemSelect = document.getElementById('item');
+            itemSelect.selectedOptions[0].dataset.price = selectedPrice; // تحديث سعر العنصر بناءً على نوع الرخام المحدد
+        }
+
+        function addDimensionGroup() {
+            dimensionGroupCount++;
+            const dimensionsDiv = document.getElementById('dimensions');
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'dimension-group';
+            groupDiv.innerHTML = `
+                <h3>مجموعة الأبعاد ${dimensionGroupCount}</h3>
+                <label for=""length${dimensionGroupCount}"">طول (م):</label>
+                <input type=""number"" id=""length${dimensionGroupCount}"" placeholder=""أدخل الطول"" required />
+                <label for=""width${dimensionGroupCount}"">عرض (م):</label>
+                <input type=""number"" id=""width${dimensionGroupCount}"" placeholder=""أدخل العرض"" required />
+                <label for=""quantity${dimensionGroupCount}"">عدد العناصر:</label>
+                <input type=""number"" id=""quantity${dimensionGroupCount}"" placeholder=""أدخل العدد"" required min=""1"" />
+            `;
+            dimensionsDiv.appendChild(groupDiv);
+        }
+
+        function calculateTotal() {
+            const itemSelect = document.getElementById('item');
+            const pricePerSquareMeter = parseFloat(itemSelect.selectedOptions[0].dataset.price);
+            let totalCost = 0;
+            let totalArea = 0;
+
+            const dimensionsDiv = document.getElementById('dimensions');
+            const lengthInputs = dimensionsDiv.querySelectorAll('[id^=""length""]');
+            const widthInputs = dimensionsDiv.querySelectorAll('[id^=""width""]');
+            const quantityInputs = dimensionsDiv.querySelectorAll('[id^=""quantity""]');
+
+            lengthInputs.forEach((lengthInput, index) => {
+                const length = parseFloat(lengthInput.value);
+                const width = parseFloat(widthInputs[index].value);
+                const quantity = parseInt(quantityInputs[index].value);
+
+                if (isNaN(length) || isNaN(width) || isNaN(quantity)) {
+                    alert('يرجى إدخال قيم صحيحة للطول والعرض والعدد.');
+                    return;
+                }
+
+                const area = length * width; // حساب المساحة بالمتر المربع
+                totalArea += area * quantity; // إضافة المساحة مضروبة في العدد إلى المجموع
+                totalCost += area * pricePerSquareMeter * quantity; // إضافة التكلفة مضروبة في العدد إلى المجموع
+            });
+
+            // عرض النتيجة
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `المساحة الإجمالية: ${totalArea.toFixed(2)} م²<br>التكلفة الإجمالية: ${totalCost.toFixed(2)} درهم`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
