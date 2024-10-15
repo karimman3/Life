@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - LIFE CERAME</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .contact-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .contact-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .contact-form button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>اتصل بنا</h2>
+    <div class="contact-form">
+        <input type="text" id="name" placeholder="الاسم" required oninput="validateForm()">
+        <input type="text" id="city" placeholder="المدينة" required oninput="validateForm()">
+        <button id="sendButton" onclick="sendWhatsApp()" disabled>إرسال إلى واتساب</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const city = document.getElementById('city').value;
+            const sendButton = document.getElementById('sendButton');
+            
+            // تفعيل الزر إذا كانت جميع الحقول ممتلئة
+            if (name !== "" && city !== "") {
+                sendButton.disabled = false;
+            } else {
+                sendButton.disabled = true;
+            }
+        }
+
+        function sendWhatsApp() {
+            const name = document.getElementById('name').value;
+            const city = document.getElementById('city').value;
+            const message = `الاسم: ${name}%0Aالمدينة: ${city}`;
+            const phoneNumber = "0660201206";
+            const whatsappUrl = `https://wa.me/212${phoneNumber}?text=${message}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>
