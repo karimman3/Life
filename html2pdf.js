@@ -34,7 +34,55 @@
         }
 
         function downloadInvoice() {
+            // Check if required fields are filled
+            const requiredFields = document.querySelectorAll('.required');
+            for (const field of requiredFields) {
+                if (!field.value) {
+                    alert("Veuillez remplir tous les champs obligatoires.");
+                    return;
+                }
+            }
+
             const element = document.getElementById('invoice');
-            html2pdf().from(element).save('devis.pdf');
+            const invoiceNumber = document.getElementById('invoiceNumber').textContent;
+            const subtotal = document.getElementById('subtotal').textContent;
+            const tax = document.getElementById('tax').textContent;
+            const total = document.getElementById('total').textContent;
+
+            // Add the total and other information to the invoice before downloading
+            const downloadContent = `
+                <h1>Devis</h1>
+                <p>Date: ${document.getElementById('invoiceDate').textContent}</p>
+                <p>Numéro de la facture: ${invoiceNumber}</p>
+                <h2>Informations du client</h2>
+                <p>Client: ${document.getElementById('clientName').value}</p>
+                <p>Ice: ${document.getElementById('clientIce').value}</p>
+                <p>Téléphone: ${document.getElementById('clientPhone').value}</p>
+                <h2>Détails des articles</h2>
+                <table class="items">
+                    <thead>
+                        <tr>
+                            <th>Réf</th>
+                            <th>Description</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire HT</th>
+                            <th>Total HT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${document.getElementById('itemsBody').innerHTML}
+                    </tbody>
+                </table>
+                <div class="totals">
+                    <p>Sous-total: ${subtotal} MAD</p>
+                    <p>TVA (20%): ${tax} MAD</p>
+                    <p>Total TTC: ${total} MAD</p>
+                </div>
+            `;
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = downloadContent;
+
+            html2pdf().from(tempDiv).save(`devis_${invoiceNumber}.pdf`);
         }
     </script>
