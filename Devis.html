@@ -10,8 +10,8 @@
             background-color: #f8f8f8;
             margin: 0;
             padding: 20px;
-            direction: ltr;
-            text-align: left;
+            direction: ltr; /* تغيير الاتجاه إلى اليسار */
+            text-align: left; /* تغيير المحاذاة إلى اليسار */
         }
         .container {
             background-color: #fff;
@@ -36,7 +36,7 @@
             font-size: 16px;
             font-weight: bold;
         }
-        .client-info, .company-info, .table-container {
+        .client-info, .table-container {
             margin-top: 20px;
         }
         label {
@@ -106,18 +106,6 @@
 
             <label for="clientPhone">Numéro de téléphone:</label>
             <input type="text" id="clientPhone" placeholder="Entrez le numéro de téléphone">
-        </div>
-
-        <div class="company-info">
-            <h3>Informations de la société</h3>
-            <label for="companyPhone">Numéro de téléphone:</label>
-            <input type="text" id="companyPhone" value="0660201206" readonly>
-
-            <label for="companyEmail">Email:</label>
-            <input type="email" id="companyEmail" value="lifecerame@gmail.com" readonly>
-
-            <label for="companyAddress">Adresse:</label>
-            <input type="text" id="companyAddress" value="lotissement riad ouled mtaa secteur 02 n° 382 temara" readonly>
         </div>
 
         <div class="table-container">
@@ -218,28 +206,22 @@
             const { jsPDF } = window.jspdf;
 
             const doc = new jsPDF();
-            const date = new Date(document.getElementById("date").value).toLocaleDateString('en-US'); // تغيير التاريخ إلى الإنجليزية
+            const date = new Date(document.getElementById("date").value).toLocaleDateString('fr-FR'); // تغيير التاريخ إلى الفرنسية
             const clientName = document.getElementById("clientName").value;
             const clientIce = document.getElementById("clientIce").value;
             const clientPhone = document.getElementById("clientPhone").value;
-            const companyPhone = document.getElementById("companyPhone").value;
-            const companyEmail = document.getElementById("companyEmail").value;
-            const companyAddress = document.getElementById("companyAddress").value;
             const grandTotal = document.getElementById("grandTotal").textContent;
-            
+
             doc.setFontSize(16);
             doc.text("LIFE CERAME", 20, 20);
             doc.setFontSize(12);
             doc.text(`Date: ${date}`, 20, 30);
             doc.text(`Nom du client: ${clientName}`, 20, 40);
             doc.text(`ICE: ${clientIce}`, 20, 50);
-            doc.text(`Numéro de téléphone du client: ${clientPhone}`, 20, 60);
-            doc.text(`Numéro de téléphone de la société: ${companyPhone}`, 20, 70);
-            doc.text(`Email: ${companyEmail}`, 20, 80);
-            doc.text(`Adresse: ${companyAddress}`, 20, 90);
-            doc.text("Détails de la commande:", 20, 100);
+            doc.text(`Numéro de téléphone: ${clientPhone}`, 20, 60);
+            doc.text("Détails de la commande:", 20, 70);
             
-            let y = 110; // Y position for the table
+            let y = 80; // Y position for the table
             doc.setFontSize(10);
             doc.text("Ref | Description | Quantité | Prix TTC | Total", 20, y);
             y += 10;
