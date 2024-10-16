@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Interactif</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .invoice {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .company-info, .client-info {
+            margin-bottom: 20px;
+        }
+
+        .client-info input, .items input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .items th, .items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .totals {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .totals p {
+            margin: 0;
+        }
+
+        .add-item {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .add-item button {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .download button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice" id="invoice">
+        <h1>Devis</h1>
+        <div class="company-info">
+            <p>Nom de l'entreprise: LIFE CERAME</p>
+            <p>Adresse: 123 Rue Exemple, Casablanca, Maroc</p>
+            <p>Téléphone: +212 6 00 00 00 00</p>
+            <p>Email: contact@lifecerame.com</p>
+        </div>
+
+        <div class="client-info">
+            <h2>Informations du client</h2>
+            <input type="text" id="clientName" placeholder="Nom du client">
+            <input type="text" id="clientAddress" placeholder="Adresse du client">
+            <input type="text" id="clientPhone" placeholder="Téléphone du client">
+            <input type="email" id="clientEmail" placeholder="Email du client">
+        </div>
+
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>Réf</th>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire HT</th>
+                    <th>Total HT</th>
+                </tr>
+            </thead>
+            <tbody id="itemsBody">
+                <tr>
+                    <td><input type="text" class="ref" placeholder="Réf"></td>
+                    <td><input type="text" class="description" placeholder="Description"></td>
+                    <td><input type="number" class="quantity" placeholder="Quantité" oninput="updateTotals()"></td>
+                    <td><input type="number" class="unitPrice" placeholder="Prix unitaire HT" oninput="updateTotals()"></td>
+                    <td class="totalHT">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="add-item">
+            <button onclick="addItem()">Ajouter un article</button>
+        </div>
+
+        <div class="totals">
+            <p>Sous-total: <span id="subtotal">0</span> MAD</p>
+            <p>TVA (20%): <span id="tax">0</span> MAD</p>
+            <p>Total TTC: <span id="total">0</span> MAD</p>
+        </div>
+
+        <div class="download">
+            <button onclick="downloadInvoice()">Télécharger la facture</button>
+        </div>
+    </div>
+
+    <!-- مكتبة html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function updateTotals() {
+            let subtotal = 0;
+            const rows = document.querySelectorAll('#itemsBody tr');
+
+            rows.forEach(row => {
+                const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
+                const unitPrice = parseFloat(row.querySelector('.unitPrice').value) || 0;
+                const totalHT = quantity * unitPrice;
+                row.querySelector('.totalHT').textContent = totalHT.toFixed(2);
+                subtotal += totalHT;
+            });
+
+            const tax = subtotal * 0.2;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('tax').textContent = tax.toFixed(2);
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        function addItem() {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" class="ref" placeholder="Réf"></td>
+                <td><input type="text" class="description" placeholder="Description"></td>
+                <td><input type="number" class="quantity" placeholder="Quantité" oninput="updateTotals()"></td>
+                <td><input type="number" class="unitPrice" placeholder="Prix unitaire HT" oninput="updateTotals()"></td>
+                <td class="totalHT">0</td>
+            `;
+            document.getElementById('itemsBody').appendChild(row);
+        }
+
+        function downloadInvoice() {
+            const element = document.getElementById('invoice');
+            html2pdf().from(element).save('devis.pdf');
+        }
+    </script>
+</body>
+</html>
