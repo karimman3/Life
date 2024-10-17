@@ -112,6 +112,84 @@
             bottom: 0;
             width: 100%;
         }
+        /* قسم المنتجات */
+        .products {
+            display: flex;
+            flex-direction: column; /* تغيير الاتجاه إلى عمودي */
+            align-items: center;
+            margin: 20px 0;
+        }
+        .products-row {
+            display: flex; /* تغيير الاتجاه إلى أفقي */
+            justify-content: center;
+            margin: 10px 0; /* إضافة هامش بين الصفوف */
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s; /* تأثير تكبير */
+            cursor: pointer; /* تغيير المؤشر عند التمرير */
+        }
+        .product:hover {
+            transform: scale(1.05); /* تكبير عند التحويم */
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .product p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .view-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .view-more:hover {
+            text-decoration: underline;
+        }
+        /* نافذة عرض المنتج */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .close-modal {
+            color: #000;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -150,32 +228,92 @@
             <h2>مرحبًا بك في LIFE CERAME</h2>
             <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك في مجال الفايبر أوبتيك.</p>
         </div>
-    </div>
 
-    <footer>
-        <p>&copy; 2024 LIFE CERAME - جميع الحقوق محفوظة</p>
-    </footer>
-
-    <script>
-        function toggleMenu(event) {
-            event.stopPropagation(); // منع الحدث من الانتقال للأعلى
-            const nav = document.getElementById('navbar');
-            nav.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const nav = document.getElementById('navbar');
-            nav.classList.remove('active'); // إزالة فئة active لإغلاق القائمة
-        }
-
-        // إغلاق القائمة عند الضغط في أي مكان آخر
-        document.addEventListener('click', function(event) {
-            const nav = document.getElementById('navbar');
-            if (nav.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-    </script>
-
-</body>
-</html>
+        <!-- قسم المنتجات -->
+        <h2>منتجاتنا</h2>
+        <div class="products">
+            <div class="products-row">
+                <div class="product" onclick="openModal('المنتوج 1', 'product1.jpg', 'بلد المنتج 1', '$100')">
+                    <img src="product1.jpg" alt="المنتوج 1">
+                    <h3>المنتوج 1</h3>
+                    <p>وصف مختصر للمنتوج 1.</p>
+                </div>
+                <div class="product" onclick="openModal('المنتوج 2', 'product2.jpg', 'بلد المنتج 2', '$150')">
+                    <img src="product2.jpg" alt="المنتوج 2">
+                    <h3>المنتوج 2</h3>
+                    <p>وصف مختصر للمنتوج 2.</p</p>
+                    </div>
+                    </div>
+                    <div class="products-row">
+                    <div class="product" onclick="openModal('المنتوج 3', 'product3.jpg', 'بلد المنتج 3', '$120')">
+                    <img src="product3.jpg" alt="المنتوج 3">
+                    <h3>المنتوج 3</h3>
+                    <p>وصف مختصر للمنتوج 3.</p>
+                    </div>
+                    <div class="product" onclick="openModal('المنتوج 4', 'product4.jpg', 'بلد المنتج 4', '$130')">
+                    <img src="product4.jpg" alt="المنتوج 4">
+                    <h3>المنتوج 4</h3>
+                    <p>وصف مختصر للمنتوج 4.</p>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    <footer>
+                    <p>&copy; 2024 LIFE CERAME - جميع الحقوق محفوظة</p>
+                    </footer>
+                    
+                    <!-- نافذة عرض المنتج -->
+                    <div class="modal" id="productModal" style="display:none;">
+                    <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal()">×</span>
+                    <img id="modalProductImage" src="" alt="صورة المنتج" style="width: 100%; height: auto; border-radius: 5px;">
+                    <h3 id="modalProductName"></h3>
+                    <p id="modalProductCountry"></p>
+                    <p id="modalProductPrice"></p>
+                    </div>
+                    </div>
+                    
+                    <script>
+                    function toggleMenu(event) {
+                    event.stopPropagation(); // منع الحدث من الانتقال للأعلى
+                    const nav = document.getElementById('navbar');
+                    nav.classList.toggle('active');
+                    }
+                    
+                    function closeMenu() {
+                    const nav = document.getElementById('navbar');
+                    nav.classList.remove('active'); // إزالة فئة active لإغلاق القائمة
+                    }
+                    
+                    // إغلاق القائمة عند الضغط في أي مكان آخر
+                    document.addEventListener('click', function(event) {
+                    const nav = document.getElementById('navbar');
+                    if (nav.classList.contains('active')) {
+                    closeMenu();
+                    }
+                    });
+                    
+                    function openModal(productName, productImage, productCountry, productPrice) {
+                    const modal = document.getElementById('productModal');
+                    const modalImage = document.getElementById('modalProductImage');
+                    const modalProductName = document.getElementById('modalProductName');
+                    const modalProductCountry = document.getElementById('modalProductCountry');
+                    const modalProductPrice = document.getElementById('modalProductPrice');
+                    
+                    modalImage.src = productImage; // تعيين مصدر الصورة
+                    modalProductName.textContent = productName; // تعيين اسم المنتج
+                    modalProductCountry.textContent = 'بلد الصنع: ' + productCountry; // تعيين بلد المنتج
+                    modalProductPrice.textContent = 'السعر: ' + productPrice; // تعيين سعر المنتج
+                    
+                    modal.style.display = 'flex'; // عرض النافذة
+                    }
+                    
+                    function closeModal() {
+                    const modal = document.getElementById('productModal');
+                    modal.style.display = 'none'; // إخفاء النافذة
+                    }
+                    </script>
+                    
+                    </body>
+                    </html>
