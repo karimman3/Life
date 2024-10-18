@@ -6,6 +6,36 @@
     <title>LIFE CERAME</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+    .changing-product {
+    background-color: #f9f9f9; /* لون خلفية خفيف */
+    border: 1px solid #ddd; /* إطار خفيف */
+    border-radius: 8px; /* زوايا دائرية */
+    padding: 15px; /* حواف داخلية */
+    text-align: center; /* توسيط المحتوى */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+    margin: 20px auto; /* مركز الشريط */
+    width: 90%; /* عرض 90% من الشاشة */
+    max-width: 300px; /* الحد الأقصى للعرض */
+    }
+    
+    .product-image {
+    width: 100%; /* عرض الصورة 100% */
+    height: auto; /* ارتفاع تلقائي */
+    border-radius: 5px; /* زوايا دائرية للصورة */
+    }
+    
+    .product-name {
+    font-size: 18px; /* حجم الخط للاسم */
+    font-weight: bold; /* نص عريض */
+    color: #333; /* لون النص */
+    margin: 10px 0; /* هامش فوق وتحت */
+    }
+    
+    .product-description {
+    font-size: 14px; /* حجم الخط للوصف */
+    color: #666; /* لون نص أفتح */
+    margin: 5px 0; /* هامش فوق وتحت */
+    }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -223,17 +253,18 @@
         </div>
     </div>
 
-            <div class="container">
+    <div class="container">
     <div class="content">
     <h2>مرحبًا بك في LIFE CERAME</h2>
-    <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك .</p>
-        
+    <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك.</p>
+    
     <!-- شريط المنتجات المتغيرة -->
     <div class="changing-product" id="changingProduct">
-    <img src="Sacol gris.webp" alt="sacol gris" style="width:100%; height:auto;">
-    <h3>sacol gris</h3>
-    <p>مادة لاصقة لتركيب البلاط الداخلي - السعر: 60 درهم</p>
-        
+    <img src="Sacol gris.webp" alt="sacol gris" class="product-image">
+    <h3 class="product-name">sacol gris</h3>
+    <p class="product-description">مادة لاصقة لتركيب البلاط الداخلي - السعر: 60 درهم</p>
+    </div>
+    
     <script>
     let currentIndex = 0;
     const products = [
@@ -267,17 +298,16 @@
     currentIndex = (currentIndex + 1) % products.length;
     const productContainer = document.getElementById('changingProduct');
     productContainer.innerHTML = `
-    <img src="${products[currentIndex].image}" alt="${products[currentIndex].name}" style="width:100%; height:auto;">
-    <h3>${products[currentIndex].name}</h3>
-    <p>${products[currentIndex].description} - السعر: ${products[currentIndex].price}</p>
+    <img src="${products[currentIndex].image}" alt="${products[currentIndex].name}" class="product-image">
+    <h3 class="product-name">${products[currentIndex].name}</h3>
+    <p class="product-description">${products[currentIndex].description} - السعر: ${products[currentIndex].price}</p>
     `;
     }
     
     setInterval(changeProduct, 5000); // تغيير المنتج كل 5 ثواني
     </script> 
     </div>
-    </div></div>
-        </div>
+    </div>
 
         <!-- قسم المنتجات -->
         <h2>منتجاتنا</h2>
