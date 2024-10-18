@@ -223,10 +223,60 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="content">
-            <h2>مرحبًا بك في LIFE CERAME</h2>
-            <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك .</p>
+            <div class="container">
+    <div class="content">
+    <h2>مرحبًا بك في LIFE CERAME</h2>
+    <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك .</p>
+        
+    <!-- شريط المنتجات المتغيرة -->
+    <div class="changing-product" id="changingProduct">
+    <img src="Sacol gris.webp" alt="sacol gris" style="width:100%; height:auto;">
+    <h3>sacol gris</h3>
+    <p>مادة لاصقة لتركيب البلاط الداخلي - السعر: 60 درهم</p>
+        
+    <script>
+    let currentIndex = 0;
+    const products = [
+    {
+    name: "sacol gris",
+    image: "Sacol gris.webp",
+    description: "مادة لاصقة لتركيب البلاط الداخلي",
+    price: "60 درهم"
+    },
+    {
+    name: "sacol blanco",
+    image: "Sacol blanco.webp",
+    description: "مادة لاصقة لتركيب البلاط الداخلي",
+    price: "80 درهم"
+    },
+    {
+    name: "sacol mc1 gris",
+    image: "Sacol mc1 gris.webp",
+    description: "مادة لاصقة لتركيب البلاط الداخلي والخارجي",
+    price: "70 درهم"
+    },
+    {
+    name: "sacol mc1 blanco",
+    image: "Sacol mc1 blanco.webp",
+    description: "مادة لاصقة لتركيب البلاط الداخلي والخارجي",
+    price: "150 درهم"
+    }
+    ];
+    
+    function changeProduct() {
+    currentIndex = (currentIndex + 1) % products.length;
+    const productContainer = document.getElementById('changingProduct');
+    productContainer.innerHTML = `
+    <img src="${products[currentIndex].image}" alt="${products[currentIndex].name}" style="width:100%; height:auto;">
+    <h3>${products[currentIndex].name}</h3>
+    <p>${products[currentIndex].description} - السعر: ${products[currentIndex].price}</p>
+    `;
+    }
+    
+    setInterval(changeProduct, 5000); // تغيير المنتج كل 5 ثواني
+    </script> 
+    </div>
+    </div></div>
         </div>
 
         <!-- قسم المنتجات -->
