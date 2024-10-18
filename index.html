@@ -6,6 +6,22 @@
     <title>LIFE CERAME</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        .products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.products-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.product {
+    width: 48%;
+    text-align: center;
+}
     .changing-product {
     background-color: #f9f9f9; /* لون خلفية خفيف */
     border: 1px solid #ddd; /* إطار خفيف */
@@ -310,58 +326,33 @@
     </div>
 
         <!-- قسم المنتجات -->
-        <h2>منتجاتنا</h2>
-        <div class="products">
-            <div class="products-row">
-                <div class="product" onclick="openModal('sacol gris', 'Sacol gris.webp', '  اسبانيا', ' 60 درهم')">
-                    <img src="Sacol gris.webp" alt="sacol gris">
-                    <h3> sacol gris</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي </p>
-                </div>
-                <div class="product" onclick="openModal(' sacol blanco', 'Sacol blanco.webp', ' اسبانيا', '80 درهم')">
-                    <img src="Sacol blanco.webp" alt="sacol blanco">
-                    <h3>sacol blanco</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي </p>
-                    </div>
-                    </div>
-                    <div class="products-row">
-                    <div class="product" onclick="openModal('sacol mc1 gris ', 'Sacol mc1 gris.webp', 'اسبانيا  ', '70 درهم')">
-                    <img src="Sacol mc1 gris.webp" alt="sacol mc1 gris ">
-                    <h3>sacol mc1 gris</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي و الخارجي</p>
-                    </div>
-                    <div class="product" onclick="openModal('sacol mc1 blanco ', 'Sacol mc1 blanco.webp', 'اسبانيا', '150 درهم')">
-                    <img src="Sacol mc1 blanco.webp" alt="sacol mc1 blanco ">
-                    <h3>sacol mc1 blanco</h3>
-                    <p> مادة لاصقة لتركيب البلاط الداخلي والخارجي </p>
-                    </div>
-                    
-                    <div class="products">
-            <div class="products-row">
-                <div class="product" onclick="openModal('sacol gris', 'Sacol gris.webp', '  اسبانيا', ' 60 درهم')">
-                    <img src="Sacol gris.webp" alt="sacol gris">
-                    <h3> sacol gris</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي </p>
-                </div>
-                <div class="product" onclick="openModal(' sacol blanco', 'Sacol blanco.webp', ' اسبانيا', '80 درهم')">
-                    <img src="Sacol blanco.webp" alt="sacol blanco">
-                    <h3>sacol blanco</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي </p>
-                    </div>
-                    </div>
-                    <div class="products-row">
-                    <div class="product" onclick="openModal('sacol mc1 gris ', 'Sacol mc1 gris.webp', 'اسبانيا  ', '70 درهم')">
-                    <img src="Sacol mc1 gris.webp" alt="sacol mc1 gris ">
-                    <h3>sacol mc1 gris</h3>
-                    <p>مادة لاصقة لتركيب البلاط الداخلي و الخارجي</p>
-                    </div>
-                    <div class="product" onclick="openModal('sacol mc1 blanco ', 'Sacol mc1 blanco.webp', 'اسبانيا', '150 درهم')">
-                    <img src="Sacol mc1 blanco.webp" alt="sacol mc1 blanco ">
-                    <h3>sacol mc1 blanco</h3>
-                    <p> مادة لاصقة لتركيب البلاط الداخلي والخارجي </p>
-                    </div>
-                    </div>
-                    </div>
+<h2>منتجاتنا</h2>
+<div class="products">
+    <div class="products-row">
+        <div class="product" onclick="openModal('sacol gris', 'Sacol gris.webp', 'اسبانيا', '60 درهم')">
+            <img src="Sacol gris.webp" alt="sacol gris">
+            <h3>sacol gris</h3>
+            <p>مادة لاصقة لتركيب البلاط الداخلي</p>
+        </div>
+        <div class="product" onclick="openModal('sacol blanco', 'Sacol blanco.webp', 'اسبانيا', '80 درهم')">
+            <img src="Sacol blanco.webp" alt="sacol blanco">
+            <h3>sacol blanco</h3>
+            <p>مادة لاصقة لتركيب البلاط الداخلي</p>
+        </div>
+    </div>
+    <div class="products-row">
+        <div class="product" onclick="openModal('sacol mc1 gris', 'Sacol mc1 gris.webp', 'اسبانيا', '70 درهم')">
+            <img src="Sacol mc1 gris.webp" alt="sacol mc1 gris">
+            <h3>sacol mc1 gris</h3>
+            <p>مادة لاصقة لتركيب البلاط الداخلي والخارجي</p>
+        </div>
+        <div class="product" onclick="openModal('sacol mc1 blanco', 'Sacol mc1 blanco.webp', 'اسبانيا', '150 درهم')">
+            <img src="Sacol mc1 blanco.webp" alt="sacol mc1 blanco">
+            <h3>sacol mc1 blanco</h3>
+            <p>مادة لاصقة لتركيب البلاط الداخلي والخارجي</p>
+        </div>
+    </div>
+</div>
                     
                     <footer>
                     <p>&copy; 2024 LIFE CERAME - جميع الحقوق محفوظة</p>
